@@ -17,27 +17,33 @@ formatted_calc.call(30000 * 100)
 ```
 
 # 2 service objects / business objects / operations
+code that does not belong to model or controller
+-> gems do that already
+-> trailblazer operation
+-> extract to PORO seems to be our choice, example: Tests::Create class used in API, suite selection and free trial
 
--> tons of gems do that already!
+typical "complex" operation workflow
 
--> use case: start a scheduled run
+-> mock use case: create a run
 
 # 3 fnop
 
 ```
-can_create_run_for_tests =
-  ValidateDisabledRuns >>
-  ValidateClientPricingPlanActive >>
-  HasSufficientCredits
+CreateScheduledRun =
+  CanCreateRunForTests >> StartRun >> AddTests >> NotifyAvo
 
 # how to call it, what's the return value?
-can_create_run_for_tests.call(...)
+CreateScheduledRun.call(...)
 => <#Success ...> or <#Error at: ValidateDisabledRuns...> ?
 ```
 
 demo fnop
 
-what is still wrong with this
+-> sliding scale
+
+-> "Context" vs multiple args?
 -> should be tested individually
 -> types and signatures are out of control
--> we might want more stuff to happen on error
+-> we might want more stuff to happen on error (cleanup?)
+-> supporting transactions
+

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+# rubocop:disable all
 require 'pry'
 
 TAX_RATE = 0.4

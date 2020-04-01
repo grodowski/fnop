@@ -4,11 +4,11 @@ require 'rspec'
 require 'pry'
 
 $LOAD_PATH << '.'
-require 'demo2'
+require 'fnop'
 
-OpOne = make_fnop { |context| context[:a] = 'foo' }
-OpTwo = make_fnop { nil }
-OpThree = make_fnop { nil }
+OpOne = fnop { |context| context[:a] = 'foo' }
+OpTwo = fnop { nil }
+OpThree = fnop { nil }
 
 describe 'fnop' do
   it 'works' do
@@ -24,10 +24,10 @@ describe 'fnop' do
   end
 
   it 'can terminate with error at any fnop' do
-    always_error = make_fnop { |ctx| ctx.error = 'BAZ' }
+    always_error = fnop { |ctx| ctx.error = 'BAZ' }
 
     mock_callable = spy(call: nil)
-    stub_const('FnopThree', make_fnop { mock_callable.call })
+    stub_const('FnopThree', fnop { mock_callable.call })
 
     can_create_run_for_tests =
       OpOne >> always_error >> OpThree
