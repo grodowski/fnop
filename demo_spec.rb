@@ -4,11 +4,6 @@ $LOAD_PATH << '.'
 require 'demo'
 require 'pry'
 
-# inspiration:
-# RunHelper#can_create_run_for_tests?
-# RunHelper#create_run
-# RunHelper#validate_run
-
 CreateRun =
   CanCreateRunForTests >> StartRun >> AddTests >> NotifyAvo
 
